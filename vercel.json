@@ -1,30 +1,29 @@
 {
   "version": 2,
-  "buildCommand": "npm run install-all && npm run build:frontend",
-  "public": true,
-  "installCommand": "npm install && cd backend && npm install && cd ../frontend && npm install",
-  "env": [
-    "MONGODB_URI",
-    "JWT_SECRET",
-    "MAIL_USER",
-    "MAIL_PASS",
-    "AWS_ACCESS_KEY_ID",
-    "AWS_SECRET_ACCESS_KEY",
-    "AWS_REGION",
-    "S3_BUCKET_NAME",
-    "NODE_ENV",
-    "GROQ_API_KEY",
-    "GROQ_MODEL",
-    "REACT_APP_API_BASE_URL"
-  ],
-  "rewrites": [
+  "builds": [
     {
-      "source": "/api/:path*",
-      "destination": "/api"
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     },
     {
-      "source": "/:path*",
-      "destination": "/index.html"
+      "src": "api/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.ts"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
