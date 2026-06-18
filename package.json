@@ -1,0 +1,24 @@
+{
+  "name": "alumni-platform",
+  "version": "1.0.0",
+  "description": "Digital Alumni Relationship Management Platform",
+  "private": true,
+  "scripts": {
+    "setup": "powershell -ExecutionPolicy Bypass -File ./setup.ps1",
+    "install-all": "cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "seed:demo": "cd backend && npm run seed:demo",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "alumni",
+    "management",
+    "university",
+    "donations",
+    "events"
+  ],
+  "author": "",
+  "license": "ISC"
+}
