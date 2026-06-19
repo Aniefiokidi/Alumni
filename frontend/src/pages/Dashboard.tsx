@@ -15,6 +15,7 @@ import {
   FaBullhorn,
   FaArrowRight,
 } from 'react-icons/fa';
+import { Sun, Sunset, Moon } from 'lucide-react';
 import { formatNaira } from '../utils/currency';
 
 const quickActions = [
@@ -76,9 +77,9 @@ const quickActions = [
 
 const getGreeting = () => {
   const h = new Date().getHours();
-  if (h < 12) return 'Good morning';
-  if (h < 17) return 'Good afternoon';
-  return 'Good evening';
+  if (h < 12) return { text: 'Good morning', Icon: Sun };
+  if (h < 17) return { text: 'Good afternoon', Icon: Sunset };
+  return { text: 'Good evening', Icon: Moon };
 };
 
 const Dashboard: React.FC = () => {
@@ -202,11 +203,14 @@ const Dashboard: React.FC = () => {
             <div className="absolute top-10 right-1/3 w-32 h-32 rounded-full bg-white/5" />
 
             <div className="relative max-w-screen-xl mx-auto">
-              <p className="text-primary-200 text-sm font-semibold uppercase tracking-widest mb-2">
-                {getGreeting()}
-              </p>
+              {(() => { const { text, Icon } = getGreeting(); return (
+                <p className="flex items-center gap-2 text-primary-200 text-sm font-semibold uppercase tracking-widest mb-2">
+                  <Icon size={15} />
+                  {text}
+                </p>
+              ); })()}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
-                {user?.name?.split(' ')[0]} 👋
+                {user?.name?.split(' ')[0]}
               </h1>
               <p className="text-primary-100 text-base sm:text-lg max-w-xl leading-relaxed">
                 Welcome back to the <span className="font-semibold text-white">Eagles Alumni Platform</span>.
